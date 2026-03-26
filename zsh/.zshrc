@@ -160,3 +160,13 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Custom env
+ENV_D="$HOME/.envrc.d"
+
+if [ -d "$ENV_D" ] ; then
+  for env_file ("$ENV_D"/*.envrc(N)); do
+    source $env_file
+  done
+  unset env_file
+fi

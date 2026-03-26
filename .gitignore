@@ -1,5 +1,6 @@
 ### Ignore ###
 .env
+*.envrc
 private/
 
 ### Common ###
