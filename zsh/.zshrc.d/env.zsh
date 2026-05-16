@@ -15,3 +15,6 @@ export OSFONTDIR=$HOME/Library/Fonts//:/Library/Fonts//:/System/Library/Fonts//
 export CHKTEXRC=$HOME/dotfiles/rc
 export LATEXMKRCSYS=$HOME/dotfiles/rc/latexmkrc
 export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+
+export OPENSPEC_TELEMETRY=0
+export DO_NOT_TRACK=1

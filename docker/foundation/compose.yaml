@@ -110,7 +110,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION}
-    # profiles: [disabled]
+    profiles: [disabled]
     networks:
       - proxy-bridge
     ports:

@@ -6,9 +6,9 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
+    restart: unless-stopped
     ports:
       - 3000:3000
-    restart: unless-stopped
     environment:
       - GF_SECURITY_ADMIN_USER=grafana
       - GF_SECURITY_ADMIN_PASSWORD=grafana
@@ -18,14 +18,14 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
     ports:
       - 9090:9090
-    restart: unless-stopped
     volumes:
       - ./prometheus:/etc/prometheus
       - prom_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
 
   zipkin:
     container_name: zipkin

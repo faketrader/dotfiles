@@ -16,14 +16,20 @@ alias map="xargs -n1"
 alias cls='clear'
 alias c='clear'
 
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 # file manage
 alias ll='ls -lAFh -I .DS_Store'
-alias ls='ls -FG'
+# alias ls='ls -FG'
 # alias ls='ls --color=auto'
 # alias ls='ls --color=tty'
 
-alias grep='grep --color=auto'
-# alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
 
 alias t='tail -f'

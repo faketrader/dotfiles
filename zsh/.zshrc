@@ -82,21 +82,22 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git git-flow
   aliases
-  docker docker-compose
-  common-aliases
-  extract
-  history
-  colorize
-  thefuck
-  conda
-  python
-  dotenv
   brew
+  colorize
+  # command-not-found
+  common-aliases
+  conda
+  # dbt
+  dotenv
+  extract
+  docker docker-compose
+  git git-flow
   gnu-utils
+  history
   mvn
-  dbt
+  python
+  thefuck
   zsh-autosuggestions
   # must be the last plugin loaded
   zsh-syntax-highlighting
@@ -161,6 +162,36 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=($HOME/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("$HOME/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.lmstudio/bin"
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# bun completions
+[ -s "/opt/bun/_bun" ] && source "/opt/bun/_bun"
+
 # Custom env
 ENV_D="$HOME/.envrc.d"
 
@@ -170,3 +201,7 @@ if [ -d "$ENV_D" ] ; then
   done
   unset env_file
 fi
+
+# taobao-native CLI
+TBN_CLI_BIN="/Users/whan/Library/Application Support/taobao/cli/bin"
+case ":$PATH:" in *":$TBN_CLI_BIN:"*) ;; *) export PATH="$PATH:$TBN_CLI_BIN" ;; esac

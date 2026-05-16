@@ -1,0 +1,12 @@
+# alias
+
+alias grm='git rm'
+
+git submodule add --depth 1
+
+--shallow-submodules
+
+
+git clone --depth 1
+
+

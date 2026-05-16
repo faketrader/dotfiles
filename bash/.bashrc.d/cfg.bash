@@ -26,3 +26,6 @@ alias egrep='egrep --color=auto'
 ## bash completion (Homebrew)
 # lead to slow startup
 # [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+export HISTCONTROL=ignoredups        # 不记录连续重复的命令
+export HISTTIMEFORMAT='% F % T '       # 历史命令显示时间戳

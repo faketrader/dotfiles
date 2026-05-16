@@ -1,0 +1,52 @@
+
+networks:
+  proxy-bridge:
+    external: true
+
+
+services:
+  server:
+    image: authentik/server:${AUTHENTIK_VERSION:-2025.12}
+    command: server
+    env_file:
+    - .env
+    environment:
+      AUTHENTIK_POSTGRESQL__HOST: postgres
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
+    ports:
+    - ${COMPOSE_PORT_HTTP:-9000}:9000
+    - ${COMPOSE_PORT_HTTPS:-9443}:9443
+    restart: unless-stopped
+    volumes:
+    - ./media:/media
+    - ./custom-templates:/templates
+    networks:
+      - proxy-bridge
+
+  worker:
+    image: authentik/server:${AUTHENTIK_VERSION:-2025.12}
+    command: worker
+    env_file:
+    - .env
+    environment:
+      AUTHENTIK_POSTGRESQL__HOST: postgres
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
+    restart: unless-stopped
+    user: root
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./media:/media
+    - ./certs:/certs
+    - ./custom-templates:/templates
+    networks:
+      - proxy-bridge
+
+volumes:
+  database:
+    driver: local
